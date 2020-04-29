@@ -4,25 +4,23 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { EmployeeComponent } from './employee/employee.component';
-import { ProductViewComponent } from './product-view/product-view.component';
-import { ProductAddComponent } from './product-add/product-add.component';
-import { NotFoundComponent } from './errors/not-found/not-found.component';
+import { ProductModule } from './product/product.module';
+import { ErrorsModule } from './errors/errors.module';
+import { DashboardModule } from './dashboard/dashboard.module';
+import { EmployeeModule } from './employee/employee.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    DashboardComponent,
-    EmployeeComponent,
-    ProductViewComponent,
-    ProductAddComponent,
-    NotFoundComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ProductModule,
+    ErrorsModule,
+    DashboardModule,
+    EmployeeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

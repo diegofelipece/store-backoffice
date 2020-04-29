@@ -3,15 +3,22 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { EmployeeComponent } from './employee/employee.component';
-import { ProductViewComponent } from './product-view/product-view.component';
-import { ProductAddComponent } from './product-add/product-add.component';
+import { ProductViewComponent } from './product/product-view/product-view.component';
+import { ProductAddComponent } from './product/product-add/product-add.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 
 const routes: Routes = [
-  { path: '', component: DashboardComponent },
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+  { path: 'dashboard', component: DashboardComponent },
   { path: 'employee', component: EmployeeComponent },
-  { path: 'product/add', component: ProductAddComponent },
-  { path: 'product/:id', component: ProductViewComponent },
+  {
+    path: 'product',
+    children: [
+      { path: 'add', component: ProductAddComponent },
+      { path: ':id', component: ProductViewComponent },
+      { path: '**', component: NotFoundComponent },
+    ]
+  },
   { path: '**', component: NotFoundComponent },
 ];
 
