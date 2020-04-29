@@ -11,6 +11,6 @@ import { ProductViewComponent } from './product-view/product-view.component';
   ],
   imports: [
     CommonModule
-  ]
+  ],
 })
 export class ProductModule { }

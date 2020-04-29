@@ -8,6 +8,7 @@ import { ProductModule } from './product/product.module';
 import { ErrorsModule } from './errors/errors.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { EmployeeModule } from './employee/employee.module';
+import { LayoutsModule } from './layouts/layouts.module';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { EmployeeModule } from './employee/employee.module';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    LayoutsModule,
     ProductModule,
     ErrorsModule,
     DashboardModule,
