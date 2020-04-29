@@ -1,0 +1,10 @@
+.l-basic {
+  display: flex;
+  flex-flow: column;
+  min-height: 100vh;
+
+  &__wrapper {
+    padding: 1.6rem 2rem;
+    flex-grow: 1;
+  }
+}
