@@ -17,9 +17,6 @@ export class EmployeeComponent implements OnInit {
 
   ngOnInit(): void {
     // TODO: create form component to get employeeName from user
-    setTimeout(() => {
-      this.setEmployee();
-    }, 3000);
   }
 
   setEmployee() {
