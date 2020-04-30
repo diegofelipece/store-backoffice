@@ -1,7 +1,9 @@
-<div class="l-basic">
-  <app-header></app-header>
+<div class="l-basic" *ngIf="( store$ | async ) as store">
+  <app-header [title]="store.name"></app-header>
   <div class="l-basic__wrapper">
     <router-outlet></router-outlet>
   </div>
-  <app-footer></app-footer>
+  <app-footer>
+    {{store.name}}, {{ store.category }} © all rights reserved.
+  </app-footer>
 </div>
