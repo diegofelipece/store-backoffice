@@ -2,8 +2,13 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+// API
+const BASE_PATH = 'http://us-central1-test-b7665.cloudfunctions.net/api';
+const STORE_ID = 'ijpxNJLM732vm8AeajMR';
+
 export const environment = {
-  production: false
+  production: false,
+  API_BASE_URL: `${BASE_PATH}/stores/${STORE_ID}`
 };
 
 /*
