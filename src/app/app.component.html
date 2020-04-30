@@ -1,4 +1,4 @@
-<div class="l-basic" *ngIf="( store$ | async ) as store">
+<div class="l-basic" *ngIf="( store$ | async ) as store; else loadingScreen">
   <app-header [title]="store.name"></app-header>
   <div class="l-basic__wrapper">
     <router-outlet></router-outlet>
@@ -7,3 +7,7 @@
     {{store.name}}, {{ store.category }} © all rights reserved.
   </app-footer>
 </div>
+
+<ng-template #loadingScreen>
+  <app-loading></app-loading>
+</ng-template>
