@@ -1,32 +1,39 @@
 import { Injectable } from '@angular/core';
 
 import { Employee } from './employee';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 const KEY = 'employee';
 
 @Injectable()
 export class EmployeeService {
 
-  constructor() { }
+  employeeSubject = new BehaviorSubject<Employee>(null);
+  constructor() {
+    this.getActiveEmployee();
+  }
 
   hasActiveEmployee(): boolean {
-    const employee = this.getEmployee();
-    return !!employee.name;
+    return !!window.localStorage.getItem(KEY);
   }
 
   setEmployee(employeeName: string) {
     window.localStorage.setItem(KEY, employeeName);
+    this.getActiveEmployee();
   }
 
-  getEmployee(): Employee {
-    const employee = window.localStorage.getItem(KEY);
-
-    return {
-      name: employee
-    };
+  getEmployee(): Observable<Employee> {
+    return this.employeeSubject.asObservable();
   }
 
-  deleteEmployee() {
+  private getActiveEmployee() {
+    const employeeName = window.localStorage.getItem(KEY);
+
+    this.employeeSubject.next(employeeName ? { name: employeeName } : null);
+  }
+
+  removeEmployee() {
     window.localStorage.removeItem(KEY);
+    this.employeeSubject.next(null);
   }
 }

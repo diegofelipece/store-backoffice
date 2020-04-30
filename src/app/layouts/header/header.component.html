@@ -1,3 +1,15 @@
-<mat-toolbar color="primary">
+<mat-toolbar class="l-header" color="primary">
   <span>{{ title }}</span>
+
+  <span *ngIf="(employee$ | async) as employee">
+    <mat-menu #appMenu="matMenu">
+      <button mat-menu-item (click)="employeeLogout()">
+        <mat-icon>exit_to_app</mat-icon> Change active employee
+      </button>
+    </mat-menu>
+
+    <button mat-button [matMenuTriggerFor]="appMenu">
+      <mat-icon>assignment_ind</mat-icon> {{ employee.name }}
+    </button>
+  </span>
 </mat-toolbar>
