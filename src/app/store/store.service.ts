@@ -7,9 +7,7 @@ import { Store } from './store';
 
 const { API_BASE_URL } = environment;
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class StoreService {
 
   constructor(private http: HttpClient) { }
