@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormControl, Validators, FormGroup, FormBuilder, AbstractControl } from '@angular/forms';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 import { EmployeeService } from './employee.service';
+import { Employee } from './employee';
 
 @Component({
   selector: 'app-employee',
@@ -12,6 +14,7 @@ import { EmployeeService } from './employee.service';
 export class EmployeeComponent implements OnInit {
 
   employeeForm: FormGroup;
+  employee$: Observable<Employee>;
   constructor(
     private employeeService: EmployeeService,
     private router: Router,
@@ -19,6 +22,8 @@ export class EmployeeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.employee$ = this.employeeService.getEmployee();
+
     this.employeeForm = this.formBuilder.group({
       name: [
         '',
@@ -52,5 +57,9 @@ export class EmployeeComponent implements OnInit {
       const employeeName = this.employeeForm.get('name').value;
       this.setEmployee(employeeName);
     }
+  }
+
+  employeeReset() {
+    this.employeeService.removeEmployee();
   }
 }
