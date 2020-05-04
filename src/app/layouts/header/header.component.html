@@ -1,5 +1,5 @@
 <mat-toolbar class="l-header" color="primary">
-  <span>{{ title }}</span>
+  <a class="l-header__title" [routerLink]="['dashboard']">{{ title }}</a>
 
   <span *ngIf="(employee$ | async) as employee">
     <mat-menu #appMenu="matMenu">

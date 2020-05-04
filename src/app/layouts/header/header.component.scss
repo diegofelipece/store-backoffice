@@ -1,4 +1,9 @@
 .l-header {
   display: flex;
   justify-content: space-between;
+
+  &__title {
+    color: white;
+    text-decoration: none;
+  }
 }

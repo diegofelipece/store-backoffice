@@ -10,6 +10,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { StoreModule } from '../store/store.module';
 import { LoadingComponent } from './loading/loading.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { LoadingComponent } from './loading/loading.component';
     MatMenuModule,
     MatIconModule,
     MatButtonModule,
-    StoreModule
+    StoreModule,
+    RouterModule
   ],
   exports: [
     HeaderComponent,
