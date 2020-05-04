@@ -1,0 +1,10 @@
+.c-product-form {
+  display: flex;
+  flex-flow: column;
+
+  &__input {
+    &.--bottom-spaced {
+      margin-bottom: 1rem;
+    }
+  }
+}

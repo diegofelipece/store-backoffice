@@ -1,15 +1,15 @@
 export interface Product {
 
-  id: string;
+  id?: string;
   category: string;
-  reviews: string[];
+  reviews?: string[];
   price: number;
   title: string;
-  description: string;
+  description?: string;
   employee: string;
 }
 
-export interface ProductFetched {
+export interface ProductFetchedFromList {
 
   id: string;
   data: {

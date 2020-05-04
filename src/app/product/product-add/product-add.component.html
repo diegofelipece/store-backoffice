@@ -1,1 +1,51 @@
-<p>product-add works!</p>
+<form class="c-product-form" [formGroup]="productForm" (submit)="onFormSubmit()">
+  <h1 class="mat-title">Register a new product</h1>
+
+  <mat-form-field class="c-product-form__input" appearance="outline">
+    <mat-label>Title</mat-label>
+    <input matInput formControlName="title">
+    <mat-error *ngIf="productForm.get('title').errors">Product title is required.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="c-product-form__input" appearance="outline">
+    <mat-label>Description</mat-label>
+    <textarea matInput formControlName="description"></textarea>
+  </mat-form-field>
+
+  <mat-form-field class="c-product-form__input --bottom-spaced" appearance="outline">
+    <mat-label>Category</mat-label>
+    <input
+      matInput
+      formControlName="category"
+      [matAutocomplete]="auto"
+    >
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let category of categories" [value]="category.name">
+        {{category.name}}
+      </mat-option>
+    </mat-autocomplete>
+    <mat-hint>Tip: you can select any existing category from the list or write to create a new one.</mat-hint>
+    <mat-error *ngIf="productForm.get('category').errors">Product category is required.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="c-product-form__input" appearance="outline">
+    <mat-label>Price</mat-label>
+    <input matInput formControlName="price" type="number" min="0">
+    <span matSuffix>€</span>
+    <mat-error *ngIf="productForm.get('price').errors">
+      <span *ngIf="productForm.get('price').errors.required">Price is can't be empty.</span>
+      <span *ngIf="productForm.get('price').errors.pattern">No "points" or special characters allowed.</span>
+    </mat-error>
+  </mat-form-field>
+
+  <h2>Reviews</h2>
+  <div *ngFor="let review of reviews; index as reviewIndex">
+    <mat-form-field class="c-product-form__input" >
+      <input matInput>
+    </mat-form-field>
+    <button mat-stroked-button color="primary" (click)="removeReview(reviewIndex)">Remove {{ reviewIndex }}</button>
+  </div>
+  <button mat-stroked-button color="primary" (click)="addReview()">Add Review</button>
+
+  <button mat-flat-button color="primary">Save Product</button>
+</form>
