@@ -1,1 +1,10 @@
-<button (click)="setEmployee()">Set employee!</button>
+<form class="c-employee" [formGroup]="employeeForm" (submit)="onFormSubmit()">
+  <h1 class="mat-title">Set a new active employee</h1>
+  <mat-form-field appearance="outline">
+    <mat-label>Enter your name</mat-label>
+    <input matInput formControlName="name">
+    <mat-icon matSuffix>assignment_ind</mat-icon>
+    <mat-error *ngIf="this.getErrorMessage('name')">{{ this.getErrorMessage('name') }}</mat-error>
+  </mat-form-field>
+  <button mat-flat-button color="primary">Start working!</button>
+</form>
