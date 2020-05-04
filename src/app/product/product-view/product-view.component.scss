@@ -1,0 +1,26 @@
+.c-product-view {
+  &__reviews {
+    margin: 1.2rem 0;
+
+    &__item {
+      background-color: #f2f2f2;
+      margin: 0.5rem;
+    }
+  }
+
+  &__footer {
+    &__employee {
+      margin: 1rem 0;
+
+      &__name {
+        font-weight: bold;
+      }
+    }
+
+    &__actions {
+      &__bt {
+        margin-right: 0.5rem;
+      }
+    }
+  }
+}

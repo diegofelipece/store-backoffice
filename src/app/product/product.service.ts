@@ -20,4 +20,8 @@ export class ProductService {
         ...product,
       })));
   }
+
+  deleteProduct(productId: string) {
+    return this.http.delete(`${API_BASE_URL}/products/${productId}`);
+  }
 }

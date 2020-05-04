@@ -1,32 +1,46 @@
 <div class="c-product-view" *ngIf="(product$ | async) as product; else loading">
-  <div class="c-product-view__section">
-    <span class="c-product-view__section__title">Title:</span>
-    <h1 class="mat-headline">{{ product.title }}</h1>
+  <h1 class="mat-title">Product Details <small>({{ product.id }})</small></h1>
+  <mat-list>
+    <div mat-subheader>Title</div>
+    <mat-list-item>
+      <h1>{{ product.title }}</h1>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+
+    <div mat-subheader>Description</div>
+    <mat-list-item>
+      <p>{{ product.description }}</p>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+
+    <div mat-subheader>Price</div>
+    <mat-list-item>
+      <p>{{ (product.price | currency : 'EUR' ) }}</p>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+  </mat-list>
+
+  <div class="c-product-view__reviews">
+    <h2 class="mat-body-3">Reviews</h2>
+    <mat-list *ngIf="product.reviews; else emptyReviews">
+      <mat-list-item class="c-product-view__reviews__item" *ngFor="let review of product.reviews">"{{ review }}"</mat-list-item>
+    </mat-list>
+
+    <ng-template #emptyReviews>
+      <p>This product has no reviews.</p>
+    </ng-template>
   </div>
 
-  <div class="c-product-view__section">
-    <span class="c-product-view__section__title">Description:</span>
-    <p>{{ product.description }}</p>
-  </div>
-
-  <div class="c-product-view__section">
-    <span class="c-product-view__section__title">Price:</span>
-    <p>{{ (product.price | currency) }}</p>
-  </div>
-
-  <div class="c-product-view__section" *ngIf="product.reviews">
-    <h2 class="mat-title">Reviews</h2>
-    <div *ngFor="let review of product.reviews">
-      {{ review }}
-    </div>
-  </div>
+  <mat-divider></mat-divider>
 
   <div class="c-product-view__footer">
-    <p>Product created by <span class="c-product-view__footer__employee">{{ product.employee }}</span></p>
-  </div>
-
-  <div class="c-product-view__actions">
-    <button mat-flat-button color="primary">Delete Product</button>
+    <div mat-line class="c-product-view__footer__employee">
+      Product created by <span class="c-product-view__footer__employee__name">{{ product.employee }}</span>
+    </div>
+    <div mat-line class="c-product-view__footer__actions">
+      <button class="c-product-view__footer__actions__bt" mat-flat-button color="primary" [routerLink]="['/dashboard']">Back to dashboard</button>
+      <button class="c-product-view__footer__actions__bt" mat-stroked-button color="warn" (click)="deleteProduct(product.id)">Delete Product</button>
+    </div>
   </div>
 </div>
 

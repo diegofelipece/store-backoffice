@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 import { MatButtonModule } from '@angular/material/button';
+import { MatListModule } from '@angular/material/list';
 
 import { ProductAddComponent } from './product-add/product-add.component';
 import { ProductViewComponent } from './product-view/product-view.component';
@@ -17,8 +19,10 @@ import { LayoutsModule } from '../layouts/layouts.module';
   imports: [
     CommonModule,
     LayoutsModule,
+    RouterModule,
     HttpClientModule,
-    MatButtonModule
+    MatButtonModule,
+    MatListModule
   ],
   providers: [ProductService]
 })
