@@ -1,1 +1,35 @@
-<p>product-view works!</p>
+<div class="c-product-view" *ngIf="(product$ | async) as product; else loading">
+  <div class="c-product-view__section">
+    <span class="c-product-view__section__title">Title:</span>
+    <h1 class="mat-headline">{{ product.title }}</h1>
+  </div>
+
+  <div class="c-product-view__section">
+    <span class="c-product-view__section__title">Description:</span>
+    <p>{{ product.description }}</p>
+  </div>
+
+  <div class="c-product-view__section">
+    <span class="c-product-view__section__title">Price:</span>
+    <p>{{ (product.price | currency) }}</p>
+  </div>
+
+  <div class="c-product-view__section" *ngIf="product.reviews">
+    <h2 class="mat-title">Reviews</h2>
+    <div *ngFor="let review of product.reviews">
+      {{ review }}
+    </div>
+  </div>
+
+  <div class="c-product-view__footer">
+    <p>Product created by <span class="c-product-view__footer__employee">{{ product.employee }}</span></p>
+  </div>
+
+  <div class="c-product-view__actions">
+    <button mat-flat-button color="primary">Delete Product</button>
+  </div>
+</div>
+
+<ng-template #loading>
+  <app-loading></app-loading>
+</ng-template>
