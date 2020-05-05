@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { StoreService } from './store/store.service';
 import { Store } from './store/store';
@@ -12,9 +15,24 @@ import { Store } from './store/store';
 export class AppComponent implements OnInit {
 
   store$: Observable<Store>;
-  constructor(private storeService: StoreService) {}
+  constructor(
+    private storeService: StoreService,
+    private snackbar: MatSnackBar,
+  ) {}
 
   ngOnInit(): void {
-    this.store$ = this.storeService.getStore();
+    this.fetchStoreData();
+  }
+
+  fetchStoreData() {
+    this.store$ = this.storeService.getStore()
+      .pipe(catchError(err => {
+        const snackbarRef = this.snackbar.open('Something went wrong. Please try again', 'Retry', { duration: -1 });
+        snackbarRef.onAction().subscribe(() => {
+          this.fetchStoreData();
+        });
+
+        return throwError(err);
+      }));
   }
 }
