@@ -40,12 +40,13 @@
 
   <h2>Reviews</h2>
   <div *ngFor="let review of reviews; index as reviewIndex">
-    <mat-form-field class="c-product-form__input" >
-      <input matInput>
+    <mat-form-field class="c-product-form__input">
+      <input matInput (blur)="updateReview($event.target.value ,reviewIndex)" [value]="review">
     </mat-form-field>
-    <button mat-stroked-button color="primary" (click)="removeReview(reviewIndex)">Remove {{ reviewIndex }}</button>
+    ({{review}})
+    <button mat-stroked-button color="primary" (click)="removeReview(reviewIndex)">Remove ({{reviewIndex}})</button>
   </div>
-  <button mat-stroked-button color="primary" (click)="addReview()">Add Review</button>
+  <button mat-stroked-button color="primary" type="button" (click)="addReview()">Add Review</button>
 
-  <button mat-flat-button color="primary">Save Product</button>
+  <button mat-flat-button color="primary" type="submit">Save Product</button>
 </form>

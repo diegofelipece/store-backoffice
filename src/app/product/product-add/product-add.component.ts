@@ -66,12 +66,10 @@ export class ProductAddComponent implements OnInit {
   }
 
   removeReview(index: number) {
-    this.reviews.splice(index, index);
+    this.reviews = this.reviews.filter((review, i) => i !== index);
   }
 
-  updateReview(newValue, index: number) {
-    console.log('newValue, index: number', { newValue, index });
-
-    this.reviews[index] = newValue;
+  updateReview(newValue: string, index: number) {
+    this.reviews = this.reviews.map((review, i) => (i === index) ? newValue : review);
   }
 }
