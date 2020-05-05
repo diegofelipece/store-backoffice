@@ -8,6 +8,7 @@ import { CategoriesService } from 'src/app/categories/categories.service';
 import { Category } from 'src/app/categories/category';
 import { ProductService } from '../product.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-product-add',
@@ -26,6 +27,7 @@ export class ProductAddComponent implements OnInit {
     private categoriesService: CategoriesService,
     private productService: ProductService,
     private router: Router,
+    private snackbar: MatSnackBar,
   ) { }
 
   ngOnInit(): void {
@@ -87,10 +89,11 @@ export class ProductAddComponent implements OnInit {
         .addProduct(ProductToSend)
         .subscribe(
           productId => {
+            this.snackbar.open(`Product "${ProductToSend.title}" registered successfully.`);
             this.router.navigate(['/product', productId]);
           },
           err => {
-            console.log('--ops!');
+            this.snackbar.open(`Product "${ProductToSend.title}" registration failed, please try again.`);
             console.error(err);
           }
         );

@@ -11,6 +11,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatCardModule } from '@angular/material/card';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
+import { SnackBarConfig } from '../snackbar/snackbar.config';
 
 import { ProductAddComponent } from './product-add/product-add.component';
 import { ProductViewComponent } from './product-view/product-view.component';
@@ -35,9 +38,10 @@ import { CategoriesModule } from '../categories/categories.module';
     MatFormFieldModule,
     MatAutocompleteModule,
     MatCardModule,
+    MatSnackBarModule,
     LayoutsModule,
     CategoriesModule
   ],
-  providers: [ProductService]
+  providers: [ ProductService, SnackBarConfig ]
 })
 export class ProductModule { }

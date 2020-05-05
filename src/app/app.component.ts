@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
   fetchStoreData() {
     this.store$ = this.storeService.getStore()
       .pipe(catchError(err => {
-        const snackbarRef = this.snackbar.open('Something went wrong. Please try again', 'Retry', { duration: -1 });
+        const snackbarRef = this.snackbar.open('Something went wrong, please try again', 'Try Again', { duration: -1 });
         snackbarRef.onAction().subscribe(() => {
           this.fetchStoreData();
         });
