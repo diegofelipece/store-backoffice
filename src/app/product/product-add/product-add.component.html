@@ -39,14 +39,20 @@
   </mat-form-field>
 
   <h2>Reviews</h2>
-  <div *ngFor="let review of reviews; index as reviewIndex">
-    <mat-form-field class="c-product-form__input">
-      <input matInput (blur)="updateReview($event.target.value ,reviewIndex)" [value]="review">
-    </mat-form-field>
-    ({{review}})
-    <button mat-stroked-button color="primary" (click)="removeReview(reviewIndex)">Remove ({{reviewIndex}})</button>
+  <div
+    formArrayName="reviews"
+    *ngFor="let review of reviews.controls; let i = index"
+  >
+    <div [formGroupName]="i">
+      <mat-form-field class="c-product-form__input">
+        <textarea matInput formControlName="review"></textarea>
+      </mat-form-field>
+      ({{ review.get('review').value }})
+      <button mat-stroked-button color="primary" type="button" (click)="removeReview(i)">Remove</button>
+    </div>
   </div>
   <button mat-stroked-button color="primary" type="button" (click)="addReview()">Add Review</button>
+
 
   <button mat-flat-button color="primary" type="submit">Save Product</button>
 </form>

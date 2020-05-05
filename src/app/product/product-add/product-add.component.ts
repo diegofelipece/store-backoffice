@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 
 import { Employee } from 'src/app/employee/employee';
 import { EmployeeService } from 'src/app/employee/employee.service';
@@ -16,8 +16,8 @@ export class ProductAddComponent implements OnInit {
 
   employee: Employee;
   categories: Category[];
-  reviews: string[] = [];
   productForm: FormGroup;
+  reviews: FormArray;
   constructor(
     private formBuilder: FormBuilder,
     private employeeService: EmployeeService,
@@ -30,16 +30,35 @@ export class ProductAddComponent implements OnInit {
       category: ['', [Validators.required]],
       price: ['', [Validators.required, Validators.pattern(/[0-9]/)]],
       description: [],
+      reviews: this.formBuilder.array([])
     });
+
+    this.reviews = this.productForm.get('reviews') as FormArray;
 
     this.employeeService.getEmployee().subscribe(employee => this.employee = employee);
     this.categoriesService.getCategories().subscribe(categories => this.categories = categories);
   }
 
+  createReview(): FormGroup {
+    return this.formBuilder.group({
+      review: '',
+    });
+  }
+
+  addReview() {
+    this.reviews = this.productForm.get('reviews') as FormArray;
+    this.reviews.push(this.createReview());
+  }
+
+  removeReview(index: number) {
+    this.reviews = this.productForm.get('reviews') as FormArray;
+    this.reviews.removeAt(index);
+  }
+
   onFormSubmit() {
     if (this.productForm.valid) {
       const {
-        title, category, price, description,
+        title, category, price, description, reviews
       } = this.productForm.value;
 
       const ProductToSend: Product = {
@@ -49,27 +68,16 @@ export class ProductAddComponent implements OnInit {
         employee: this.employee.name
       };
 
-      if (this.reviews.length) {
-        ProductToSend.reviews = this.reviews;
+      const sanitizedReviews = reviews?.map(({ review }) => review).filter(review => !!review);
+      if (reviews && sanitizedReviews.length) {
+        ProductToSend.reviews = sanitizedReviews;
       }
 
-      if (description) {
+      if (description && description.trim()) {
         ProductToSend.description = description;
       }
 
       console.log('submit', JSON.stringify(ProductToSend));
     }
-  }
-
-  addReview() {
-    this.reviews.push('');
-  }
-
-  removeReview(index: number) {
-    this.reviews = this.reviews.filter((review, i) => i !== index);
-  }
-
-  updateReview(newValue: string, index: number) {
-    this.reviews = this.reviews.map((review, i) => (i === index) ? newValue : review);
   }
 }
