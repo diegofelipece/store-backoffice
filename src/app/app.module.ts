@@ -15,7 +15,7 @@ import { LayoutsModule } from './layouts/layouts.module';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,

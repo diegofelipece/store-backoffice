@@ -11,6 +11,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { SnackBarConfig } from '../snackbar/snackbar.config';
@@ -20,11 +21,13 @@ import { ProductViewComponent } from './product-view/product-view.component';
 import { ProductService } from './product.service';
 import { LayoutsModule } from '../layouts/layouts.module';
 import { CategoriesModule } from '../categories/categories.module';
+import { DeleteProductDialogComponent } from './delete-product-dialog/delete-product-dialog.component';
 
 @NgModule({
   declarations: [
     ProductAddComponent,
-    ProductViewComponent
+    ProductViewComponent,
+    DeleteProductDialogComponent
   ],
   imports: [
     CommonModule,
@@ -39,6 +42,7 @@ import { CategoriesModule } from '../categories/categories.module';
     MatAutocompleteModule,
     MatCardModule,
     MatSnackBarModule,
+    MatDialogModule,
     LayoutsModule,
     CategoriesModule
   ],

@@ -7,6 +7,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Product } from '../product';
 import { ProductService } from '../product.service';
 import { catchError } from 'rxjs/operators';
+import { MatDialog } from '@angular/material/dialog';
+import { DeleteProductDialogComponent } from '../delete-product-dialog/delete-product-dialog.component';
 
 @Component({
   selector: 'app-product-view',
@@ -22,6 +24,7 @@ export class ProductViewComponent implements OnInit {
     private productService: ProductService,
     private router: Router,
     private snackbar: MatSnackBar,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -50,6 +53,20 @@ export class ProductViewComponent implements OnInit {
           return throwError(err);
         }
       ));
+  }
+
+  openDeleteDialog(product: Product) {
+    const dialogRef = this.dialog.open(DeleteProductDialogComponent, {
+      width: '250px',
+      data: { product }
+    });
+
+    dialogRef.afterClosed().subscribe((productToDelete: Product | undefined) => {
+      if (productToDelete) {
+        this.deleteProduct(productToDelete);
+      }
+    });
+
   }
 
   deleteProduct(product: Product) {

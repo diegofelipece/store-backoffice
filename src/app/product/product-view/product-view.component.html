@@ -46,7 +46,7 @@
     </div>
     <div mat-line class="c-product-view__footer__actions">
       <button class="c-product-view__footer__actions__bt" mat-flat-button color="primary" [routerLink]="['/dashboard']">Back to dashboard</button>
-      <button class="c-product-view__footer__actions__bt" mat-stroked-button color="warn" (click)="deleteProduct(product)">Delete Product</button>
+      <button class="c-product-view__footer__actions__bt" mat-stroked-button color="warn" (click)="openDeleteDialog(product)">Delete Product</button>
     </div>
   </div>
 </div>
