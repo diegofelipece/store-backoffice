@@ -11,25 +11,59 @@ import { EmployeeGuard } from './employee/employee.guard';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: '/dashboard',
     pathMatch: 'full'
   },
   {
     path: 'dashboard',
     component: DashboardComponent,
     canActivate: [EmployeeGuard],
+    data: {
+      title: 'Dashboard',
+    }
   },
-  { path: 'employee', component: EmployeeComponent },
+  {
+    path: 'employee',
+    component: EmployeeComponent,
+    data: {
+      title: 'Set active employee',
+    }
+  },
   {
     path: 'product',
     canActivate: [EmployeeGuard],
     children: [
-      { path: 'add', component: ProductAddComponent },
-      { path: ':id', component: ProductViewComponent },
-      { path: '**', component: NotFoundComponent },
+      {
+        path: 'add',
+        component: ProductAddComponent,
+        data: {
+          title: 'Add a new product',
+        }
+      },
+      {
+        path: ':id',
+        component: ProductViewComponent,
+        data: {
+          title: 'Product Details',
+        }
+      },
+      {
+        path: '**',
+        redirectTo: '/not-found'
+      },
     ]
   },
-  { path: '**', component: NotFoundComponent },
+  {
+    path: 'not-found',
+    component: NotFoundComponent,
+    data: {
+      title: 'Page not found',
+    }
+  },
+  {
+    path: '**',
+    redirectTo: '/not-found'
+  },
 ];
 
 @NgModule({
