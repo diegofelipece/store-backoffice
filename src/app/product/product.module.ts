@@ -10,6 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatCardModule } from '@angular/material/card';
 
 import { ProductAddComponent } from './product-add/product-add.component';
 import { ProductViewComponent } from './product-view/product-view.component';
@@ -33,6 +34,7 @@ import { CategoriesModule } from '../categories/categories.module';
     MatInputModule,
     MatFormFieldModule,
     MatAutocompleteModule,
+    MatCardModule,
     LayoutsModule,
     CategoriesModule
   ],

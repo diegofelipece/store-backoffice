@@ -38,21 +38,24 @@
     </mat-error>
   </mat-form-field>
 
-  <h2>Reviews</h2>
-  <div
-    formArrayName="reviews"
-    *ngFor="let review of reviews.controls; let i = index"
-  >
-    <div [formGroupName]="i">
-      <mat-form-field class="c-product-form__input">
-        <textarea matInput formControlName="review"></textarea>
-      </mat-form-field>
-      ({{ review.get('review').value }})
-      <button mat-stroked-button color="primary" type="button" (click)="removeReview(i)">Remove</button>
-    </div>
+  <div class="c-product-form__reviews">
+    <h2 class="mat-body-2">Reviews</h2>
+    <mat-card
+      class="c-product-form__reviews__item"
+      formArrayName="reviews"
+      *ngFor="let review of reviews.controls; let i = index"
+    >
+      <div [formGroupName]="i" class="c-product-form__reviews__item__content">
+        <mat-form-field class="c-product-form__reviews__item__content__input">
+          <textarea matInput formControlName="review"></textarea>
+        </mat-form-field>
+        <button mat-stroked-button color="primary" type="button" (click)="removeReview(i)">Remove</button>
+      </div>
+    </mat-card>
+    <button mat-stroked-button color="primary" type="button" (click)="addReview()" class="c-product-form__reviews__add">
+      <mat-icon>add_comment</mat-icon> Add Review
+    </button>
   </div>
-  <button mat-stroked-button color="primary" type="button" (click)="addReview()">Add Review</button>
-
 
   <button mat-flat-button color="primary" type="submit">Save Product</button>
 </form>
