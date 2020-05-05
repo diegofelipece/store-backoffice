@@ -6,6 +6,8 @@ import { EmployeeService } from 'src/app/employee/employee.service';
 import { Product } from '../product';
 import { CategoriesService } from 'src/app/categories/categories.service';
 import { Category } from 'src/app/categories/category';
+import { ProductService } from '../product.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-add',
@@ -22,6 +24,8 @@ export class ProductAddComponent implements OnInit {
     private formBuilder: FormBuilder,
     private employeeService: EmployeeService,
     private categoriesService: CategoriesService,
+    private productService: ProductService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -77,7 +81,19 @@ export class ProductAddComponent implements OnInit {
         ProductToSend.description = description;
       }
 
-      console.log('submit', JSON.stringify(ProductToSend));
+      console.log('submit', ProductToSend);
+
+      this.productService
+        .addProduct(ProductToSend)
+        .subscribe(
+          productId => {
+            this.router.navigate(['/product', productId]);
+          },
+          err => {
+            console.log('--ops!');
+            console.error(err);
+          }
+        );
     }
   }
 }
