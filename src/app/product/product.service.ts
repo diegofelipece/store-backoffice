@@ -38,6 +38,14 @@ export class ProductService {
   }
 
   deleteProduct(productId: string) {
-    return this.http.delete(`${API_BASE_URL}/products/${productId}`);
+
+    return this.http.delete(`${API_BASE_URL}/products/${productId}`)
+    .pipe(map(res => true))
+    .pipe(
+      catchError(err => (
+        // avoid "fake" errors
+        (err.status === 200) ? of(true) : throwError(err)
+      ))
+    );
   }
 }
