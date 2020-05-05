@@ -6,6 +6,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
+import { SnackBarConfig } from '../snackbar/snackbar.config';
 
 import { EmployeeComponent } from './employee.component';
 import { EmployeeService } from './employee.service';
@@ -20,10 +23,12 @@ import { EmployeeService } from './employee.service';
     MatIconModule,
     MatInputModule,
     MatFormFieldModule,
+    MatSnackBarModule,
     ReactiveFormsModule
   ],
   providers: [
-    EmployeeService
+    EmployeeService,
+    SnackBarConfig
   ]
 })
 export class EmployeeModule { }

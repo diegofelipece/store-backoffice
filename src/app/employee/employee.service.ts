@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { Employee } from './employee';
 import { Observable, BehaviorSubject } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 const KEY = 'employee';
 
@@ -9,7 +10,7 @@ const KEY = 'employee';
 export class EmployeeService {
 
   employeeSubject = new BehaviorSubject<Employee>(null);
-  constructor() {
+  constructor(private snackbar: MatSnackBar) {
     this.getActiveEmployee();
   }
 
@@ -20,6 +21,8 @@ export class EmployeeService {
   setEmployee(employeeName: string) {
     window.localStorage.setItem(KEY, employeeName);
     this.getActiveEmployee();
+
+    this.snackbar.open(`Welcome, ${employeeName}!`);
   }
 
   getEmployee(): Observable<Employee> {
@@ -35,5 +38,7 @@ export class EmployeeService {
   removeEmployee() {
     window.localStorage.removeItem(KEY);
     this.employeeSubject.next(null);
+
+    this.snackbar.open(`Employee logged out successfully!`);
   }
 }
