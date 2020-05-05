@@ -3,13 +3,20 @@
   <mat-list>
     <div mat-subheader>Title</div>
     <mat-list-item>
-      <h1>{{ product.title }}</h1>
+      <h1>{{ product.title | titlecase }}</h1>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+
+    <div mat-subheader>Category</div>
+    <mat-list-item>
+      <h1>{{ product.category | titlecase }}</h1>
     </mat-list-item>
     <mat-divider></mat-divider>
 
     <div mat-subheader>Description</div>
     <mat-list-item>
-      <p>{{ product.description }}</p>
+      <p *ngIf="product.description; else emptyDescription">{{ product.description }}</p>
+      <ng-template #emptyDescription><p>This product has no description.</p></ng-template>
     </mat-list-item>
     <mat-divider></mat-divider>
 
