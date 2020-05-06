@@ -21,6 +21,7 @@ export class ProductAddComponent implements OnInit {
   categories: Category[];
   productForm: FormGroup;
   reviews: FormArray;
+  isLoading = false;
   constructor(
     private formBuilder: FormBuilder,
     private employeeService: EmployeeService,
@@ -63,6 +64,8 @@ export class ProductAddComponent implements OnInit {
 
   onFormSubmit() {
     if (this.productForm.valid) {
+      this.isLoading = true;
+
       const {
         title, category, price, description, reviews
       } = this.productForm.value;
@@ -94,6 +97,7 @@ export class ProductAddComponent implements OnInit {
           },
           err => {
             this.snackbar.open(`Product "${ProductToSend.title}" registration failed, please try again.`);
+            this.isLoading = false;
             console.error(err);
           }
         );

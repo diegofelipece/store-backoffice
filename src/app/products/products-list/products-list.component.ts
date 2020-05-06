@@ -40,8 +40,8 @@ export class ProductsListComponent implements OnInit {
       .subscribe(result => {
         const isSmallScreen = result.matches;
 
-        this.layouts.grid.cols = isSmallScreen ? 1 : 4;
-        this.layouts.grid.height = isSmallScreen ? '120px' : '1:1';
+        this.layouts.grid.cols = isSmallScreen ? 2 : 4;
+        this.layouts.grid.height = isSmallScreen ? '1:2' : '1:1';
       });
   }
 

@@ -19,6 +19,8 @@ export class ProductViewComponent implements OnInit {
 
   product$: Observable<Product>;
   productId: string;
+  isLoading = false;
+  loadingCaption = 'loading product data';
   constructor(
     private activatedRoute: ActivatedRoute,
     private productService: ProductService,
@@ -70,6 +72,8 @@ export class ProductViewComponent implements OnInit {
   }
 
   deleteProduct(product: Product) {
+    this.isLoading = true;
+    this.loadingCaption = 'Deleting product';
     this.productService
       .deleteProduct(product.id)
       .subscribe(
@@ -77,7 +81,10 @@ export class ProductViewComponent implements OnInit {
           this.snackbar.open(`Product "${product.title}" deleted successfully!`);
           this.router.navigate(['dashboard']);
         },
-        err => this.snackbar.open(`Sorry, product "${product.title}" deletion failed.`)
+        err => {
+          this.isLoading = false;
+          this.snackbar.open(`Sorry, product "${product.title}" deletion failed.`);
+        }
       );
   }
 }
