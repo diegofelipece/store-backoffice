@@ -1,0 +1,36 @@
+<div class="c-dashboard">
+
+  <section class="c-dashboard__main">
+    <h1 class="c-dashboard__main__title">Dashboard</h1>
+    <div class="c-dashboard__main__image">
+      <img src="../../assets/android-chrome-512x512.png" alt="Store Icon">
+    </div>
+    <p class="c-dashboard__main__text">
+      Welcome to your store control dashboard. <br>
+      Here you can check your products list and also <a [routerLink]="['/product','add']">add a new one</a>.
+    </p>
+  </section>
+
+  <section class="c-dashboard__categories">
+    <h2 class="mat-subtitle">Categories</h2>
+    <app-categories-chart></app-categories-chart>
+  </section>
+
+  <section class="c-dashboard__products">
+    <div class="c-dashboard__products__head">
+      <h2 class="mat-subtitle">Products</h2>
+
+      <mat-button-toggle-group name="productsListLayout" aria-label="Product list layout" value="rows" (change)="productsListLayout = $event.value">
+        <mat-button-toggle value="grid" aria-label="Grid"><mat-icon>apps</mat-icon></mat-button-toggle>
+        <mat-button-toggle value="rows" aria-label="Rows"><mat-icon>dehaze</mat-icon></mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+
+    <app-products-list [activeLayout]="productsListLayout"></app-products-list>
+
+    <button mat-flat-button color="primary" [routerLink]="['/product','add']">Add a new product</button>
+  </section>
+
+</div>
+
+
