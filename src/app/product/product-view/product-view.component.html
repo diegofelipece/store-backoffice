@@ -1,4 +1,4 @@
-<div class="c-product-view" *ngIf="(product$ | async) as product; else loading">
+<div class="c-product-view" *ngIf="(!isLoading && product$ | async) as product; else loading">
   <h1 class="mat-title">Product Details <small>({{ product.id }})</small></h1>
   <mat-list>
     <div mat-subheader>Title</div>
@@ -13,19 +13,21 @@
     </mat-list-item>
     <mat-divider></mat-divider>
 
-    <div mat-subheader>Description</div>
-    <mat-list-item>
-      <p *ngIf="product.description; else emptyDescription">{{ product.description }}</p>
-      <ng-template #emptyDescription><p>This product has no description.</p></ng-template>
-    </mat-list-item>
-    <mat-divider></mat-divider>
-
     <div mat-subheader>Price</div>
     <mat-list-item>
       <p>{{ (product.price | currency : 'EUR' ) }}</p>
     </mat-list-item>
     <mat-divider></mat-divider>
   </mat-list>
+
+  <div class="c-product-view__description">
+    <h2 class="mat-body-3">Description</h2>
+    <mat-list-item>
+      <p *ngIf="product.description; else emptyDescription">{{ product.description }}</p>
+      <ng-template #emptyDescription><p>This product has no description.</p></ng-template>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+  </div>
 
   <div class="c-product-view__reviews">
     <h2 class="mat-body-3">Reviews</h2>
@@ -52,5 +54,5 @@
 </div>
 
 <ng-template #loading>
-  <app-loading caption="loading product data"></app-loading>
+  <app-loading [caption]="loadingCaption"></app-loading>
 </ng-template>
