@@ -14,7 +14,7 @@ import { Product } from 'src/app/product/product';
 export class ProductsListComponent implements OnInit {
 
   products$: Observable<Product[]>;
-  @Input() activeLayout = 'rows';
+  @Input() activeLayout: 'rows' | 'grid' = 'rows';
   layouts = {
     rows: {
       cols: 1,

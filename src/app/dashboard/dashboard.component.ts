@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
+  productsListLayout = 'rows';
   constructor() { }
 
   ngOnInit(): void {

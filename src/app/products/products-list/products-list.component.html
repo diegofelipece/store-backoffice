@@ -6,8 +6,9 @@
 >
   <mat-grid-tile class="c-products-list__item" *ngFor="let product of products">
     <div class="c-products-list__item__content">
-      <h2 class="mat-subtitle">{{ product.title }}</h2>
-      <button mat-button color="primary" [routerLink]="['/product', product.id]">See More</button>
+      <h2 class="mat-subtitle">{{ product.title | titlecase }}</h2>
+      <p *ngIf="activeLayout === 'grid'">{{ product.category | titlecase }} | {{ product.price | currency : 'EUR' }}</p>
+      <button mat-button color="primary" [routerLink]="['/product', product.id]">See details</button>
     </div>
   </mat-grid-tile>
 </mat-grid-list>
