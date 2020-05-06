@@ -1,7 +1,19 @@
 .l-loading {
   display: flex;
+  flex-flow: column;
   align-items: center;
   justify-content: center;
   height: 100%;
   width: 100%;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+
+  &__spinner {
+    margin: 1rem;
+  }
+
+  &__caption {
+    font-size: 0.8rem;
+    color: #ccc;
+  }
 }
