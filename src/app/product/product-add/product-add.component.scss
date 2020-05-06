@@ -1,0 +1,35 @@
+.c-product-form {
+  display: flex;
+  flex-flow: column;
+
+  &__input {
+    &.--bottom-spaced {
+      margin-bottom: 1rem;
+    }
+  }
+
+  &__reviews {
+    margin: 1rem 0 2rem;
+
+    &__item {
+      background-color: #f2f2f2;
+      margin-bottom: 1rem;
+
+      &__content {
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        justify-content: center;
+
+        &__input {
+          flex-grow: 1;
+          margin-right: 0.5rem;
+        }
+      }
+    }
+
+    &__add {
+      width: 100%;
+    }
+  }
+}

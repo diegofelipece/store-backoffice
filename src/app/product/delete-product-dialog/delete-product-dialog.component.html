@@ -1,0 +1,7 @@
+<div mat-dialog-content>
+  <p>Are you sure about deleting {{ data.product.title | titlecase }}?</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No, forget it</button>
+  <button mat-button [mat-dialog-close]="data.product" cdkFocusInitial>Yes</button>
+</div>

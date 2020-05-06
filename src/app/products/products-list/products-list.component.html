@@ -1,0 +1,13 @@
+<div class="c-products-list" *ngIf="(products$ | async) as products; else loading">
+  <mat-card role="group" class="c-products-list__card" *ngFor="let product of products">
+    <mat-card-content class="c-products-list__card__content">
+      <h2 class="mat-subtitle">{{ product.title }}</h2>
+      <button mat-button color="primary" [routerLink]="['/product', product.id]">See More</button>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<ng-template #loading>
+  <app-loading></app-loading>
+</ng-template>
+
