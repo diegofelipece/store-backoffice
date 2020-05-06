@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 import { SingleDataSet, Label } from 'ng2-charts';
 import { ChartType } from 'chart.js';
+
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 import { CategoriesService } from '../categories.service';
 import { Category } from '../category';
 
@@ -19,18 +22,28 @@ export class CategoriesChartComponent implements OnInit {
   public chartType: ChartType = 'polarArea';
 
   public dataFetched = false;
-  constructor(private categoriesService: CategoriesService) { }
+  constructor(
+    private categoriesService: CategoriesService,
+    private snackbar: MatSnackBar
+  ) { }
 
   ngOnInit() {
-    this.categoriesService.getCategories().subscribe(categories => {
-      this.setChartValues(categories);
-    });
+    this.fetchCategoriesData();
   }
 
-  setChartValues(categories: Category[]) {
-    this.labels = categories.map(({ name }) => name );
-    this.data = categories.map(({ productsCount }) => productsCount );
+  fetchCategoriesData() {
+    this.categoriesService.getCategories().subscribe(
+      categories => {
+        this.labels = categories.map(({ name }) => name );
+        this.data = categories.map(({ productsCount }) => productsCount );
 
-    this.dataFetched = true;
+        this.dataFetched = true;
+      },
+      err => {
+        const snackbarRef = this.snackbar.open('Categories loading failed, please try again', 'Try Again', { duration: -1 });
+
+        snackbarRef.onAction().subscribe(() => this.fetchCategoriesData());
+      }
+    );
   }
 }
