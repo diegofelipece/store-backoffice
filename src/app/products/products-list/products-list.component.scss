@@ -1,9 +1,8 @@
 .c-products-list {
 
-  display: flex;
-  flex-flow: column;
+  margin: 1rem 0 2rem;
 
-  &__card {
+  &__item {
     background-color: #f2f2f2;
     margin-bottom: 16px;
 
@@ -12,6 +11,15 @@
       flex-flow: row;
       justify-content: space-between;
       align-items: center;
+      width: 100%;
+      height: 100%;
+      padding: 1rem;
+      box-sizing: border-box;
+
+      .--grid & {
+        flex-flow: column;
+        justify-content: center;
+      }
     }
   }
 }

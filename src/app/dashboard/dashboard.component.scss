@@ -1,0 +1,47 @@
+.c-dashboard {
+
+  &__main {
+    margin: 1rem 0 4rem;
+
+    &__title {
+      font-size: 2rem;
+    }
+
+    &__image {
+      width: 100px;
+      background: #f2f2f2;
+      padding: 2rem;
+      border-radius: 99rem;
+      margin: 1rem auto;
+
+      > img {
+        max-width: 100%;
+        display: block;
+      }
+    }
+
+    &__text {
+      font-size: 1.2rem;
+      line-height: 1.4rem;
+      text-align: center;
+    }
+  }
+
+  &__categories {
+    margin: 1rem 0 4rem;
+  }
+
+  &__products {
+    margin: 1rem 0 4rem;
+    display: flex;
+    flex-flow: column;
+
+    &__head {
+      display: flex;
+      flex-flow: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+}
