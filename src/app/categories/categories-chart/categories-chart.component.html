@@ -1,0 +1,13 @@
+<div *ngIf="dataFetched; else loading" class="c-categories-chart">
+  <canvas baseChart
+    [data]="data"
+    [labels]="labels"
+    [legend]="enableLegend"
+    [chartType]="chartType"
+  >
+  </canvas>
+</div>
+
+<ng-template #loading>
+  <app-loading></app-loading>
+</ng-template>
