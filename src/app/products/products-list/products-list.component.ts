@@ -1,7 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { ProductsService } from '../products.service';
 import { Product } from 'src/app/product/product';
@@ -29,7 +32,8 @@ export class ProductsListComponent implements OnInit {
   };
   constructor(
     private productsService: ProductsService,
-    breakpointObserver: BreakpointObserver
+    breakpointObserver: BreakpointObserver,
+    private snackbar: MatSnackBar
   ) {
     breakpointObserver
       .observe([ Breakpoints.XSmall ])
@@ -42,7 +46,24 @@ export class ProductsListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.products$ = this.productsService.getProducts();
+    this.fetchProducts();
+  }
+
+  fetchProducts() {
+    this.products$ = this.productsService
+      .getProducts()
+      .pipe(catchError(err => {
+        const snackbarRef = this.snackbar.open(
+          'An error occurred while we were trying to get your product list, please try again',
+          'Try Again',
+          { duration: -1 }
+        );
+        snackbarRef.onAction().subscribe(() => {
+          this.fetchProducts();
+        });
+
+        return throwError(err);
+      }));
   }
 
 }
