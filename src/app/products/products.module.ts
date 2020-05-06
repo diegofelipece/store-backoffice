@@ -5,6 +5,8 @@ import { RouterModule } from '@angular/router';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { LayoutModule } from '@angular/cdk/layout';
 
 import { ProductsListComponent } from './products-list/products-list.component';
 import { ProductsService } from './products.service';
@@ -19,6 +21,8 @@ import { LayoutsModule } from '../layouts/layouts.module';
     HttpClientModule,
     MatCardModule,
     MatButtonModule,
+    MatGridListModule,
+    LayoutModule,
   ],
   exports: [ProductsListComponent],
   providers: [ProductsService]

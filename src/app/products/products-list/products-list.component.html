@@ -1,11 +1,16 @@
-<div class="c-products-list" *ngIf="(products$ | async) as products; else loading">
-  <mat-card role="group" class="c-products-list__card" *ngFor="let product of products">
-    <mat-card-content class="c-products-list__card__content">
+<mat-grid-list
+  *ngIf="(products$ | async) as products; else loading"
+  class="c-products-list {{ layouts[activeLayout].class }}"
+  [cols]="layouts[activeLayout].cols"
+  [rowHeight]="layouts[activeLayout].height"
+>
+  <mat-grid-tile class="c-products-list__item" *ngFor="let product of products">
+    <div class="c-products-list__item__content">
       <h2 class="mat-subtitle">{{ product.title }}</h2>
       <button mat-button color="primary" [routerLink]="['/product', product.id]">See More</button>
-    </mat-card-content>
-  </mat-card>
-</div>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>
 
 <ng-template #loading>
   <app-loading caption="loading products"></app-loading>
